@@ -1,7 +1,6 @@
 export const maxDuration = 300; // Hobby-তে সর্বোচ্চ ৫ মিনিট
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { buildSystemPrompt, BANNED_PATTERNS } from "@/lib/prompts";
 import { CHARACTERS } from "@/lib/characters";
