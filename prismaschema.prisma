@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  password  String
+  premium   Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  messages  Message[]
+}
+
+model Character {
+  id          String    @id
+  name        String
+  tagline     String
+  personality String
+  backstory   String
+  greeting    String
+  avatar      String
+  isCustom    Boolean   @default(false)
+  ownerId     String?
+  messages    Message[]
+}
+
+model Chat {
+  id          String    @id @default(cuid())
+  userId      String
+  characterId String
+  mood        String    @default("normal") // normal | romantic | adult
+  createdAt   DateTime  @default(now())
+  messages    Message[]
+
+  @@unique([userId, characterId])
+}
+
+model Message {
+  id        String    @id @default(cuid())
+  chatId    String
+  userId    String
+  characterId String
+  role      String // user | assistant
+  content   String
+  createdAt DateTime  @default(now())
+
+  @@index([userId, createdAt])
+}
