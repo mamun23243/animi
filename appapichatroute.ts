@@ -1,3 +1,4 @@
+export const maxDuration = 300; // Hobby-তে সর্বোচ্চ ৫ মিনিট
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
